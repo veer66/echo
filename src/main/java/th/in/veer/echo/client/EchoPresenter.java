@@ -12,9 +12,9 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class EchoPresenter implements Presenter {
 	public interface Display {
-		HasValue<String> getName();
+		HasValue<String> getInputMessage();
 
-		HasClickHandlers getHelloButton();
+		HasClickHandlers getRunButton();
 
 		void setMessage(String message);
 
@@ -39,18 +39,19 @@ public class EchoPresenter implements Presenter {
 	}
 
 	private void bind() {
-		display.getHelloButton().addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				rpcService.greetServer(display.getName().getValue(),
-						new AsyncCallback<String>() {
-							public void onSuccess(String result) {
-								display.setMessage("@@@ " + result);
-							}
-							public void onFailure(Throwable caught) {
-								Window.alert(caught.getMessage());
-							}
-						});
-			}
-		});
+		display.getRunButton().addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                rpcService.sendMessage(display.getInputMessage().getValue(),
+                        new AsyncCallback<String>() {
+                            public void onSuccess(String result) {
+                                display.setMessage(result);
+                            }
+
+                            public void onFailure(Throwable caught) {
+                                Window.alert(caught.getMessage());
+                            }
+                        });
+            }
+        });
 	}
 }

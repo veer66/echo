@@ -9,28 +9,28 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class EchoView extends Composite implements EchoPresenter.Display {
 	
-	private final TextBox messageBox;
-	private final Button helloButton;
+	private final TextBox inputMessageBox;
+	private final Button runButton;
 	private final TextBox messageFromServerBox;
 
 	public EchoView() {
 		VerticalPanel verticalPanel = new VerticalPanel();
 		initWidget(verticalPanel);
-		messageBox = new TextBox();
-		verticalPanel.add(messageBox);
-		helloButton = new Button("Hello");
-		verticalPanel.add(helloButton);
+		inputMessageBox = new TextBox();
+		verticalPanel.add(inputMessageBox);
+		runButton = new Button("Run");
+		verticalPanel.add(runButton);
 		messageFromServerBox = new TextBox();
 		verticalPanel.add(messageFromServerBox);
 	}
 	
 
-	public HasValue<String> getName() {
-		return messageBox;
+	public HasValue<String> getInputMessage() {
+		return inputMessageBox;
 	}
 
-	public HasClickHandlers getHelloButton() {
-		return helloButton;
+	public HasClickHandlers getRunButton() {
+		return runButton;
 	}
 
 	public void setMessage(String message) {

@@ -8,5 +8,5 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("echo")
 public interface EchoService extends RemoteService {
-	String greetServer(String name) throws IllegalArgumentException;
+	String sendMessage(String name) throws IllegalArgumentException;
 }

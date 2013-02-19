@@ -1,7 +1,6 @@
 package th.in.veer.echo.server;
 
 import th.in.veer.echo.client.EchoService;
-import th.in.veer.echo.shared.FieldVerifier;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -12,24 +11,14 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class EchoServiceImpl extends RemoteServiceServlet implements
         EchoService {
 
-	public String greetServer(String input) throws IllegalArgumentException {
-		// Verify that the input is valid. 
-		if (!FieldVerifier.isValidName(input)) {
-			// If the input is not valid, throw an IllegalArgumentException back to
-			// the client.
-			throw new IllegalArgumentException(
-					"Name must be at least 4 characters long");
-		}
-
-		String serverInfo = getServletContext().getServerInfo();
-		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
+	public String sendMessage(String input) throws IllegalArgumentException {
+//		String serverInfo = getServletContext().getServerInfo();
+//		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
 
 		// Escape data from the client to avoid cross-site script vulnerabilities.
-		input = escapeHtml(input);
-		userAgent = escapeHtml(userAgent);
+//		input = escapeHtml(input);
 
-		return "Hello, " + input + "!<br><br>I am running " + serverInfo
-				+ ".<br><br>It looks like you are using:<br>" + userAgent;
+		return input;
 	}
 
 	/**
@@ -39,11 +28,11 @@ public class EchoServiceImpl extends RemoteServiceServlet implements
 	 * @param html the html string to escape
 	 * @return the escaped string
 	 */
-	private String escapeHtml(String html) {
-		if (html == null) {
-			return null;
-		}
-		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
-				.replaceAll(">", "&gt;");
-	}
+//	private String escapeHtml(String html) {
+//		if (html == null) {
+//			return null;
+//		}
+//		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
+//				.replaceAll(">", "&gt;");
+//	}
 }
