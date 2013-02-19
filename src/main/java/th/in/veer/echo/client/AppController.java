@@ -1,5 +1,6 @@
 package th.in.veer.echo.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerManager;
@@ -10,8 +11,9 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 	private final HandlerManager eventBus;
 	private final EchoServiceAsync rpcService;
 	private HasWidgets container;
+    private final EchoGinInjector injector = GWT.create(EchoGinInjector.class);
 
-	public AppController(EchoServiceAsync rpcService,
+    public AppController(EchoServiceAsync rpcService,
 			HandlerManager eventBus) {
 		this.eventBus = eventBus;
 		this.rpcService = rpcService;
@@ -23,7 +25,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	public void go(HasWidgets container) {
 		this.container = container;
-		Presenter presenter = new EchoPresenter(rpcService, eventBus, new EchoView());
+		Presenter presenter = new EchoPresenter(rpcService, eventBus, injector.getEchoView());
 		presenter.go(container);
 	}
 
