@@ -23,7 +23,7 @@ public class AppController implements Presenter, ValueChangeHandler<String> {
 
 	public void go(HasWidgets container) {
 		this.container = container;
-		Presenter presenter = new GreetingPresenter(rpcService, eventBus, new GreetingView());
+		Presenter presenter = new EchoPresenter(rpcService, eventBus, new EchoView());
 		presenter.go(container);
 	}
 

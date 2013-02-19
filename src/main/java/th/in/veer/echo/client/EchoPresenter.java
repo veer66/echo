@@ -10,7 +10,7 @@ import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 
-public class GreetingPresenter implements Presenter {
+public class EchoPresenter implements Presenter {
 	public interface Display {
 		HasValue<String> getName();
 
@@ -25,8 +25,8 @@ public class GreetingPresenter implements Presenter {
 	private final EchoServiceAsync rpcService;
 	private Display display;
 
-	public GreetingPresenter(EchoServiceAsync rpcService,
-			HandlerManager eventBus, Display display) {
+	public EchoPresenter(EchoServiceAsync rpcService,
+                         HandlerManager eventBus, Display display) {
 		this.eventBus = eventBus;
 		this.rpcService = rpcService;
 		this.display = display;

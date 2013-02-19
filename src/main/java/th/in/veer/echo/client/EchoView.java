@@ -7,13 +7,13 @@ import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class GreetingView extends Composite implements GreetingPresenter.Display {
+public class EchoView extends Composite implements EchoPresenter.Display {
 	
 	private final TextBox messageBox;
 	private final Button helloButton;
 	private final TextBox messageFromServerBox;
 
-	public GreetingView() {
+	public EchoView() {
 		VerticalPanel verticalPanel = new VerticalPanel();
 		initWidget(verticalPanel);
 		messageBox = new TextBox();
