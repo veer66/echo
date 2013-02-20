@@ -30,7 +30,7 @@ public class EchoPresenter implements Presenter {
 		this.eventBus = eventBus;
 		this.rpcService = rpcService;
 		this.display = display;
-		bind();
+//		bind();
 	}
 
 	public void go(HasWidgets container) {
