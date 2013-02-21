@@ -10,48 +10,34 @@ import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Widget;
 
-public class EchoPresenter implements Presenter {
-	public interface Display {
-		HasValue<String> getInputMessage();
 
-		HasClickHandlers getRunButton();
-
-		void setMessage(String message);
-
-		Widget asWidget();
-	}
+public class EchoPresenter implements Presenter, EchoView.Presenter {
 
 	private final HandlerManager eventBus;
 	private final EchoServiceAsync rpcService;
-	private Display display;
+    private final EchoView view;
+
 
 	public EchoPresenter(EchoServiceAsync rpcService,
-                         HandlerManager eventBus, Display display) {
+                         HandlerManager eventBus, EchoView view) {
 		this.eventBus = eventBus;
 		this.rpcService = rpcService;
-		this.display = display;
-//		bind();
+        this.view = view;
 	}
 
 	public void go(HasWidgets container) {
 		container.clear();
-		container.add(display.asWidget());
+		container.add(view.asWidget());
 	}
 
-	private void bind() {
-		display.getRunButton().addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                rpcService.sendMessage(display.getInputMessage().getValue(),
-                        new AsyncCallback<String>() {
-                            public void onSuccess(String result) {
-                                display.setMessage(result);
-                            }
-
-                            public void onFailure(Throwable caught) {
-                                Window.alert(caught.getMessage());
-                            }
-                        });
+    public void onRunButtonClicked() {
+        rpcService.sendMessage(view.getInputMessage(), new AsyncCallback<String>() {
+            public void onFailure(Throwable throwable) {
+                view.setEchoMessage("FAIL !!!");
+            }
+            public void onSuccess(String message) {
+                view.setEchoMessage(message);
             }
         });
-	}
+    }
 }

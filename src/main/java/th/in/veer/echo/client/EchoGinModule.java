@@ -12,6 +12,6 @@ import com.google.gwt.inject.client.AbstractGinModule;
 public class EchoGinModule extends AbstractGinModule {
     @Override
     protected void configure() {
-        bind(EchoPresenter.Display.class).to(EchoView.class);
+        bind(EchoView.class).to(EchoViewImpl.class);
     }
 }
